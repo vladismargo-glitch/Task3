@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/vue.min.js"></script>
 </head>
 <body>
-
+<div id="app">
+    <div class="kanban-board">
+        <kanban-column
+            v-for="col in columnConfigs"
+            :key="col.id"
+            :config="col"
+            :tasks="tasks.filter(t => t.status === col.id)"
+            @move-task="moveTask"
+            @delete-task="deleteTask"
+            @return-task="returnTask">
+        </kanban-column>
+    </div>
+</div>
+<script src="js/main.js"></script>
 </body>
 </html>
