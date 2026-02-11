@@ -11,16 +11,16 @@ new Vue({
     },
     methods: {
         addTask(taskData) {
-            const task = {
+            this.tasks.push({
                 id: Date.now(),
                 title: taskData.title,
                 desc: taskData.desc,
                 deadline: taskData.deadline,
                 status: 'planned',
                 createdAt: new Date().toLocaleString(),
-                lastEditAt: null
-            };
-            this.tasks.push(task);
+                lastEditAt: null,
+                completedAt: null
+            });
         },
         deleteTask(id) {
             this.tasks = this.tasks.filter(t => t.id !== id);
@@ -29,17 +29,20 @@ new Vue({
             const statusFlow = ['planned', 'in-work', 'testing', 'completed'];
             let currentIndex = statusFlow.indexOf(task.status);
 
-            if (currentIndex > statusFlow.length - 1) {
+
+            if (currentIndex < statusFlow.length - 1) {
                 task.status = statusFlow[currentIndex + 1];
                 task.lastEditAt = new Date().toLocaleString();
+
+
                 if (task.status === 'completed') {
                     task.completedAt = new Date().toISOString();
                 }
             }
         },
         returnTask(task, reason) {
-            task.status = "in-work";
-            task.returnTask(reason);
+            task.status = 'in-work';
+            task.returnReason = reason;
             task.lastEditAt = new Date().toLocaleString();
         }
     }
