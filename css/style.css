@@ -1,0 +1,19 @@
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start;
+}
+.column {
+    background: #f4f5f7;
+    border-radius: 8px;
+    width: 300px;
+    padding: 10px;
+    min-height: 200px;
+}
+.create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+}

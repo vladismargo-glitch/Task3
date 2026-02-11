@@ -11,14 +11,22 @@ new Vue({
     },
     methods: {
         addTask(taskData) {
-            const task = {
+            this.tasks.push({
                 id: Date.now(),
                 ...taskData,
                 status: 'planned',
-                createdAt: new Date().toLocaleString(),
-                lastEditAt: null
-            };
-            this.tasks.push(task);
+                createdAt: new Date().toLocaleString()
+            });
+        },
+        deleteTask(id) {
+            this.tasks = this.tasks.filter(t => t.id !== id);
+        },
+        moveTask(task) {
+            console.log('Moving task:', task.title);
+            // Логику перемещения допишем в следующем коммите
+        },
+        returnTask(task) {
+            console.log('Returning task');
         }
     }
 });
