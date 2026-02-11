@@ -37,8 +37,10 @@ new Vue({
                 }
             }
         },
-        returnTask(task) {
-            console.log('Returning task');
+        returnTask(task, reason) {
+            task.status = "in-work";
+            task.returnTask(reason);
+            task.lastEditAt = new Date().toLocaleString();
         }
     }
 });

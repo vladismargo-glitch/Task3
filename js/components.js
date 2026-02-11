@@ -31,6 +31,14 @@ Vue.component('kanban-column', {
             if (this.newTask.title && this.newTask.deadline) {
                 this.$emit('create-task', { ...this.newTask });
                 this.newTask = { title: '', desc: '', deadline: '' };
+            } else {
+                alert("Заполните заголовок и дату!");
+            }
+        },
+        handleReturn(task) {
+            const reason = prompt("Укажите причину возврата:");
+            if (reason) {
+                this.$emit('return-task', task, reason);
             }
         }
     }
