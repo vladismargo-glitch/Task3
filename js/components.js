@@ -11,11 +11,15 @@ Vue.component('kanban-column', {
             </div>
             
             <div class="task-list">
-                <div v-for="task in tasks" :key="task.id" class="task-card-placeholder">
-                    <strong>{{ task.title }}</strong>
-                </div>
-            </div>
-        </div>
+                <div v-for="task in tasks" :key="task.id" class="task-card">
+    <h4>{{ task.title }}</h4>
+    <p>{{ task.desc }}</p>
+    <div class="card-meta">
+        <small>Создано: {{ task.createdAt }}</small><br>
+        <small>Дедлайн: {{ task.deadline }}</small><br>
+        <small v-if="task.lastEditAt">Изм: {{ task.lastEditAt }}</small>
+    </div>
+</div>
     `,
     data() {
         return {

@@ -11,19 +11,22 @@ new Vue({
     },
     methods: {
         addTask(taskData) {
-            this.tasks.push({
+            const task = {
                 id: Date.now(),
-                ...taskData,
+                title: taskData.title,
+                desc: taskData.desc,
+                deadline: taskData.deadline,
                 status: 'planned',
-                createdAt: new Date().toLocaleString()
-            });
+                createdAt: new Date().toLocaleString(),
+                lastEditAt: null
+            };
+            this.tasks.push(task);
         },
         deleteTask(id) {
             this.tasks = this.tasks.filter(t => t.id !== id);
         },
         moveTask(task) {
             console.log('Moving task:', task.title);
-            // Логику перемещения допишем в следующем коммите
         },
         returnTask(task) {
             console.log('Returning task');
