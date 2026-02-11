@@ -26,7 +26,16 @@ new Vue({
             this.tasks = this.tasks.filter(t => t.id !== id);
         },
         moveTask(task) {
-            console.log('Moving task:', task.title);
+            const statusFlow = ['planned', 'in-work', 'testing', 'completed'];
+            let currentIndex = statusFlow.indexOf(task.status);
+
+            if (currentIndex > statusFlow.length - 1) {
+                task.status = statusFlow[currentIndex + 1];
+                task.lastEditAt = new Date().toLocaleString();
+                if (task.status === 'completed') {
+                    task.completedAt = new Date().toISOString();
+                }
+            }
         },
         returnTask(task) {
             console.log('Returning task');
