@@ -9,6 +9,16 @@ new Vue({
             {id: 'completed', title: 'Выполнено'}
         ]
     },
+    computed: {
+        overdueCount() {
+            return this.tasks.filter(task => {
+                if (!task.deadline) return false;
+                const deadlineDate = new Date(task.deadline);
+                const compareDate = task.completedAt ? new Date(task.completedAt) : new Date();
+                return compareDate > deadlineDate;
+            }).length;
+        }
+    },
     methods: {
         addTask(taskData) {
             this.tasks.push({
@@ -29,11 +39,9 @@ new Vue({
             const statusFlow = ['planned', 'in-work', 'testing', 'completed'];
             let currentIndex = statusFlow.indexOf(task.status);
 
-
             if (currentIndex < statusFlow.length - 1) {
                 task.status = statusFlow[currentIndex + 1];
                 task.lastEditAt = new Date().toLocaleString();
-
 
                 if (task.status === 'completed') {
                     task.completedAt = new Date().toISOString();

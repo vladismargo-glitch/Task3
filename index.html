@@ -8,16 +8,20 @@
 </head>
 <body>
 <div id="app">
+    <div style="margin-bottom: 20px; font-size: 1.2rem; font-weight: bold; background: #fff; padding: 10px; border: 4px solid #000; box-shadow: 5px 5px 0px #000; display: inline-block;">
+        Просрочено задач: {{ overdueCount }}
+    </div>
+
     <div class="kanban-board">
         <kanban-column
-            v-for="col in columnConfigs"
-            :key="col.id"
-            :config="col"
-            :tasks="tasks.filter(t => t.status === col.id)"
-            @create-task="addTask"
-            @move-task="moveTask"
-            @delete-task="deleteTask"
-            @return-task="returnTask">
+                v-for="col in columnConfigs"
+                :key="col.id"
+                :config="col"
+                :tasks="tasks.filter(t => t.status === col.id)"
+                @create-task="addTask"
+                @move-task="moveTask"
+                @delete-task="deleteTask"
+                @return-task="returnTask">
         </kanban-column>
     </div>
 </div>
@@ -25,3 +29,4 @@
 <script src="js/main.js"></script>
 </body>
 </html>
+
